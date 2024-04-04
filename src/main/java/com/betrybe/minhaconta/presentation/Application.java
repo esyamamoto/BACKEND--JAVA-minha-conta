@@ -2,9 +2,9 @@ package com.betrybe.minhaconta.presentation;
 
 import com.betrybe.minhaconta.business.EnergyAccount;
 import com.betrybe.minhaconta.business.EnergyBill;
+import com.ions.lightdealer.sdk.model.ElectronicDevice;
 import com.ions.lightdealer.sdk.model.Address;
 import com.ions.lightdealer.sdk.model.Client;
-import com.ions.lightdealer.sdk.model.ElectronicDevice;
 import com.ions.lightdealer.sdk.service.LightDealerApi;
 
 /**
@@ -137,12 +137,26 @@ public class Application {
    * Req. 10 – Optimizes the energy bill.
    */
   public void optimizeEnergyBill() {
+    String cpf = ui.inputClientCpf();
+    Client cliente = api.findClient(cpf);
 
+    if (cliente == null) {
+      ui.showMessage("Pessoa cliente não encontrada!");
+    } else { // deveremos instanciar um objeto da classe EnergyAccount
+      // que está parcialmente implementada
+      EnergyAccount energyAccount = new EnergyAccount(cliente);
+      // método optimizeEnergyBill invocará o método suggestReducedUsage.
+      suggestReducedUsage(energyAccount);
+    }
   }
 
   /**
    * Req 10 - Aux. Method to display high consumptions devices.
    */
   public void suggestReducedUsage(EnergyAccount energyAccount) {
+    ElectronicDevice[] devices = energyAccount.findHighConsumptionDevices();
+    for (ElectronicDevice electronicDevice : devices) {
+      ui.showMessage("Considere reduzir o uso dos seguintes dispositivos:" + electronicDevice.getName());
+    }
   }
 }
