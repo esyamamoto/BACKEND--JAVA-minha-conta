@@ -2,10 +2,10 @@ package com.betrybe.minhaconta.presentation;
 
 import com.betrybe.minhaconta.business.EnergyAccount;
 import com.betrybe.minhaconta.business.EnergyBill;
-import com.ions.lightdealer.sdk.model.ElectronicDevice;
-import com.ions.lightdealer.sdk.service.LightDealerApi;
 import com.ions.lightdealer.sdk.model.Address;
 import com.ions.lightdealer.sdk.model.Client;
+import com.ions.lightdealer.sdk.model.ElectronicDevice;
+import com.ions.lightdealer.sdk.service.LightDealerApi;
 
 /**
  * The type Application.
@@ -83,18 +83,54 @@ public class Application {
    * Req. 7 – Register client address.
    */
   public void registerClientAddress() {
+    // método inputClientCpf() da ConsoleUserInterface.
+    String cpf = ui.inputClientCpf();
+    Client cliente = api.findClient(cpf);
+
+    if (cliente == null) {
+      ui.showMessage("Pessoa cliente não encontrada!");
+    } else {
+      Address address = new Address();
+      // cliente encontrad, um novo objeto do tipo Address, que será repassado ao método fillAddressData()
+      // método fillAddressData pode ser encontrado na classe ConsoleUserInterface;
+      ui.fillAddressData(address);
+      api.addAddressToClient(address, cliente);
+    }
   }
 
   /**
    * Req. 8 – Register address devices.
    */
   public void registerAddressDevices() {
+    String register = ui.inputAddressRegistration();
+    Address address = api.findAddress(register);
+    if (address == null) {
+      ui.showMessage("Endereço não encontrado!");
+    } else {
+      int numberDevices = ui.inputNumberOfDevices();
+
+      for (int index = 0; index < numberDevices; index++) {
+        ElectronicDevice device = new ElectronicDevice();
+        ui.fillDeviceData(device);
+        api.addDeviceToAddress(device, address);
+      }
+    }
   }
 
   /**
    * Req. 9 – Estimates the address energy bill.
    */
   public void estimateAddressBill() {
+    String estimates = ui.inputAddressRegistration();
+    Address address = api.findAddress(estimates);
+
+    if (address == null) {
+      ui.showMessage("Endereço não encontrado!");
+    } else {
+      EnergyBill energyBill = new EnergyBill(address, true);
+      double estimateX = energyBill.estimate();
+      ui.showMessage("Valor estimado para a conta: " + estimateX);
+    }
   }
 
   /**
