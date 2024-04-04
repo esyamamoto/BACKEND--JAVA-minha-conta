@@ -91,7 +91,7 @@ public class Application {
       ui.showMessage("Pessoa cliente não encontrada!");
     } else {
       Address address = new Address();
-      // cliente encontrad, um novo objeto do tipo Address, que será repassado ao método fillAddressData()
+      // cliente encontrad,um novo objeto do tipo Address,repassado ao método fillAddressData()
       // método fillAddressData pode ser encontrado na classe ConsoleUserInterface;
       ui.fillAddressData(address);
       api.addAddressToClient(address, cliente);
@@ -137,6 +137,7 @@ public class Application {
    * Req. 10 – Optimizes the energy bill.
    */
   public void optimizeEnergyBill() {
+
   }
 
   /**
