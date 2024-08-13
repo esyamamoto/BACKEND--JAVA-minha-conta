@@ -3,7 +3,7 @@
 <details>
   <summary>👨‍💻 desenvolvido </summary><br />
 
-Neste projeto, você implementei uma ferramenta para gestão do consumo energético. A ferramenta desenvolvida permitiu que pessoas consumidoras emitam suas faturas, estimem os gastos mensais, consultem histórico de pagamentos e uma série outras funcionalidades baseadas em uma SDK fornecida pela Íons Energia, uma concessionária de luz ficticia.
+Neste projeto, implementei uma ferramenta para gestão do consumo energético. A ferramenta desenvolvida permitiu que pessoas consumidoras emitam suas faturas, estimem os gastos mensais, consultem histórico de pagamentos e uma série outras funcionalidades baseadas em uma SDK fornecida pela Íons Energia, uma concessionária de luz ficticia.
 
 </details>
 
